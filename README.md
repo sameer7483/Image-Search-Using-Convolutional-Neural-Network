@@ -11,6 +11,8 @@ Model is trained on the CIFAR dataset using Convolutional Neural Network to clas
 * Defining the Convolutional Neural Network :
   The Network was defined to carry out seven convolution with batch normalization after each convolution followed by three linear fully connected layers.
   During the forward propagation, rectified linear unit(ReLu) was and max pooling were used to extract the features from the image.
+              
+              
               def __init__(self):
                     super(Net, self).__init__()
                     self.conv1 = nn.Conv2d(3, 8, 3,padding=1)
