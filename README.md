@@ -96,8 +96,8 @@ Model is trained on the CIFAR dataset using Convolutional Neural Network to clas
                      print('Finished Training')
 
 
-* Test the network on the test data:
-  The model was tested on the test data and the final result of 98% accuracy was obtained using this model.
+### Test the network on the test data:
+  The model was tested on the test data and the final result of 98% accuracy was obtained using this model which was quite impressive based on the resources used.
  
 
 
