@@ -6,11 +6,11 @@ Model is trained on the CIFAR dataset using Convolutional Neural Network to clas
 
 ## Technicalities
 
-* Data Load and Transformation: 
-  * Training data was loaded from the CIFAR dataset and transformed to be normalized with a batch size of 4 and shuffling enabled.
-* Defining the Convolutional Neural Network :
+### Data Load and Transformation: 
+  * Training and Test data was loaded from the CIFAR dataset and transformed to be normalized with a batch size of 4 and shuffling enabled for training data and disabled for test data.
+### Defining the Convolutional Neural Network :
   The Network was defined to carry out seven convolution with batch normalization after each convolution followed by three linear fully connected layers.
-  During the forward propagation, rectified linear unit(ReLu) was and max pooling were used to extract the features from the image.
+  During the forward propagation, Rectified linear unit(ReLu) and max pooling were used to extract the features from the image.
               
               
               def __init__(self):
@@ -48,7 +48,7 @@ Model is trained on the CIFAR dataset using Convolutional Neural Network to clas
                     x = (F.relu(self.conv5_bn(self.conv5_2(self.conv5(x)))))
                     x = self.pool(F.relu(self.conv6(x)))
                     x = F.relu(self.conv6_2_bn(self.conv6_2(x)))
-              x = self.pool(F.relu(self.conv7_bn(self.conv7(x))))
+                    x = self.pool(F.relu(self.conv7_bn(self.conv7(x))))
                    
                     x = x.view(-1, 1*1*256)
                     x = F.relu(self.fc1(x))
@@ -56,9 +56,48 @@ Model is trained on the CIFAR dataset using Convolutional Neural Network to clas
                     x = self.fc3(x)
                     return x
                     
-* Define a Loss function and optimizer
-* Train the network
-* Test the network on the test data
+### Define a Loss function and optimizer
+  Cross Entropy Loss was used as the criterion with Adam as the optimizer and learning rate of 0.001.
+  
+                    criterion = nn.CrossEntropyLoss()
+                    optimizer = optim.Adam(net.parameters(), lr=0.001)
+  
+  
+### Train the network
+  The network was trained over an epoch cycle of 100, performing the backward propagation and updating the weights to get the optimized result on each output of forward propagation.
+ 
+
+                     for epoch in range(100):  # loop over the dataset multiple times
+
+                         running_loss = 0.0
+                         for i, data in enumerate(trainloader, 0):
+                             # get the inputs
+                             inputs, labels = data
+
+                             # wrap them in Variable
+                             inputs, labels = Variable(inputs), Variable(labels)
+
+                             # zero the parameter gradients
+                             optimizer.zero_grad()
+
+                             # forward + backward + optimize
+                             outputs = net(inputs)
+                             loss = criterion(outputs, labels)
+                             loss.backward()
+                             optimizer.step()
+
+                             # print statistics
+                             running_loss += loss.data[0]
+                             if i % 2000 == 1999:    # print every 2000 mini-batches
+                                 print('[%d, %5d] loss: %.3f' %
+                                       (epoch + 1, i + 1, running_loss / 2000))
+                                 running_loss = 0.0
+
+                     print('Finished Training')
+
+
+* Test the network on the test data:
+  The model was tested on the test data and the final result of 98% accuracy was obtained using this model.
  
 
 
