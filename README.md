@@ -1,6 +1,6 @@
 # Image-Search-Using-Convolutional-Neural-Network
 
-This project is part of my work during research intern at Indian Institute of Technology (IIT - Bombay)(May 2017 - July 2017). 
+This project is part of my work during intern at Indian Institute of Technology (IIT - Bombay)(May 2017 - July 2017). 
 
 Model is trained on the CIFAR dataset using Convolutional Neural Network to classify images and search on the web for corresponding image. It can be easily extended to make the search engine more inclusive with more data and image type.
 
